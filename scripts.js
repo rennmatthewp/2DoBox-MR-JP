@@ -8,7 +8,7 @@ $(document).ready(function() {
 var ToDoCard = function(title, body, id = Date.now(), quality = 0) {
 	this.title = title;
 	this.body = body;
-	this.id = id; 
+	this.id = id;
 	this.quality = quality;
 };
 
@@ -19,7 +19,7 @@ ToDoCard.prototype.qualityString = function() {
 };
 
 //increments the quality value
-ToDoCard.prototype.qualityIncrement = function() { 
+ToDoCard.prototype.qualityIncrement = function() {
 	if (this.quality < 2) {
 		this.quality++;
 	}
@@ -80,7 +80,7 @@ function formSubmit() {
 	var title = $('.title-input').val();
 	var body = $('.body-input').val();
 	var ideaCard = new ToDoCard(title, body);
-	$('section').prepend(populateCard(ideaCard)); 
+	$('section').prepend(populateCard(ideaCard));
 	resetHeader();
 	sendToLocalStorage();
 };
@@ -89,7 +89,7 @@ function formSubmit() {
 function extractCard(elementInsideArticle) {
 	var article = $(elementInsideArticle).closest('article');
 	var title = $('.idea-title', article).text();
-	var body = $('.idea-body', article).text();
+	var body = $('.body', article).text();
 	var id = article.data('id');
 	var quality = $('.quality-span', article).data('quality');
 	var ideaCard = new ToDoCard(title, body, id, quality);
@@ -99,10 +99,10 @@ function extractCard(elementInsideArticle) {
 //takes values from ideaCard and inserts those values to HTML
 function populateCard(ideaCard) {
 	var newTitle = ideaCard.title;
-	var newIdea = ideaCard.body;
+	var newBody = ideaCard.body;
 	var newId = ideaCard.id;
 	var newQuality = ideaCard.qualityString();
-	return (`<article data-id="${newId}" class="idea-card">  
+	return (`<article data-id="${newId}" class="idea-card">
 				<div class="h2-wrapper">
 					<h2 class="idea-title">${newTitle}</h2>
 					<button class="delete-button">
@@ -111,7 +111,7 @@ function populateCard(ideaCard) {
 						</div>
 					</button>
 				</div>
-				<p class="idea-body">${newIdea}</p>
+				<p class="body">${newBody}</p>
 				<div class="quality-wrapper">
 					<button class="upvote-button">
 						<div class="upvote-front">
@@ -160,7 +160,7 @@ function editTitle() {
 
 function editIdea() {
 	var article = $(this).closest('article');
-	$('p', article).replaceWith(`<textarea class="idea-body edit-idea">${$(this).text()}</textarea>`);
+	$('p', article).replaceWith(`<textarea class="body edit-idea">${$(this).text()}</textarea>`);
 	$('.edit-idea').focus();
 };
 
@@ -172,7 +172,7 @@ function editTitleSave() {
 };
 
 function editIdeaSave() {
-	$(this).replaceWith(`<p class="idea-body">${$(this).val()}</p>`);
+	$(this).replaceWith(`<p class="body">${$(this).val()}</p>`);
 	var ideaCard = extractCard(this);
 	$(this).closest('article').replaceWith(populateCard(ideaCard));
 	sendToLocalStorage();
@@ -191,7 +191,7 @@ function getStoredCards() {
 	var retrievedCards = JSON.parse(localStorage.getItem("storedCards")) || [];
 	retrievedCards.forEach(function (retrievedCard) {
 		var ideaCard = new ToDoCard(retrievedCard.title, retrievedCard.body, retrievedCard.id, retrievedCard.quality);
-		$('section').append(populateCard(ideaCard)); 
+		$('section').append(populateCard(ideaCard));
 	});
 };
 
