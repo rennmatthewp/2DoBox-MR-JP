@@ -1,10 +1,4 @@
-/*
-colors
-burnt orange #ff6e40;
-amber: #ffc400;
-brown: #8d6e63;
 
-*/
 *:focus {
 	box-shadow: 0 0 3px #00a79d;
 /*	outline: 1px solid #4C5760;
@@ -60,7 +54,7 @@ section {
 	width: 582px;
 }
 
-.title-input, .idea-input, .save-button, .search {
+.title-input, .body-input, .save-button, .search {
 	border: 1.5px solid #d1d3d4;
 	display: block;
 	font-size: 22.5px;
@@ -216,11 +210,11 @@ textarea {
 		margin-bottom: 12px;
 	}
 	
-	.idea-input {
+	.body-input {
 		height: 82px;
 	}
 
-	.title-input, .idea-input, .save-button, .search {
+	.title-input, .body-input, .save-button, .search {
 		margin-left: 0;
 		margin-right: 0;
 		padding: 0;
