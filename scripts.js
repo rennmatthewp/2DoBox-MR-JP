@@ -79,8 +79,8 @@ $('.search').on('keyup', realtimeSearch)
 function formSubmit() {
 	var title = $('.title-input').val();
 	var body = $('.body-input').val();
-	var ideaCard = new ToDoCard(title, body);
-	$('section').prepend(populateCard(ideaCard));
+	var toDoCard = new ToDoCard(title, body);
+	$('section').prepend(populateCard(toDoCard));
 	resetHeader();
 	sendToLocalStorage();
 };
@@ -88,23 +88,23 @@ function formSubmit() {
 //extracts values from HTML, inputs those values to constructor function which creates an ideaCard
 function extractCard(elementInsideArticle) {
 	var article = $(elementInsideArticle).closest('article');
-	var title = $('.idea-title', article).text();
+	var title = $('.card-title', article).text();
 	var body = $('.body', article).text();
 	var id = article.data('id');
 	var quality = $('.quality-span', article).data('quality');
-	var ideaCard = new ToDoCard(title, body, id, quality);
-	return ideaCard;
+	var toDoCard = new ToDoCard(title, body, id, quality);
+	return toDoCard;
 };
 
-//takes values from ideaCard and inserts those values to HTML
-function populateCard(ideaCard) {
-	var newTitle = ideaCard.title;
-	var newBody = ideaCard.body;
-	var newId = ideaCard.id;
-	var newQuality = ideaCard.qualityString();
-	return (`<article data-id="${newId}" class="idea-card">
+//takes values from toDoCard and inserts those values to HTML
+function populateCard(toDoCard) {
+	var newTitle = toDoCard.title;
+	var newBody = toDoCard.body;
+	var newId = toDoCard.id;
+	var newQuality = toDoCard.qualityString();
+	return (`<article data-id="${newId}">
 				<div class="h2-wrapper">
-					<h2 class="idea-title">${newTitle}</h2>
+					<h2 class="card-title">${newTitle}</h2>
 					<button class="delete-button">
 						<div class="delete-front">
 							<img src="assets/delete.svg">
@@ -123,7 +123,7 @@ function populateCard(ideaCard) {
 							<img src="assets/downvote.svg">
 						</div>
 					</button>
-					<h5 class="quality">quality: <span data-quality="${ideaCard.quality}" class="quality-span">${newQuality}</span></h5>
+					<h5 class="quality">quality: <span data-quality="${toDoCard.quality}" class="quality-span">${newQuality}</span></h5>
 				</div>
 				<hr>
 			</article>`);
@@ -154,7 +154,7 @@ function deleteCard(e) {
 //edits and saves title and idea
 function editTitle() {
 	var article = $(this).closest('article');
-	$('h2', article).replaceWith(`<textarea class="idea-title edit-title">${$(this).text()}</textarea>`);
+	$('h2', article).replaceWith(`<textarea class="card-title edit-title">${$(this).text()}</textarea>`);
 	$('.edit-title').focus();
 };
 
@@ -165,7 +165,7 @@ function editIdea() {
 };
 
 function editTitleSave() {
-	$(this).replaceWith(`<h2 class="idea-title">${$(this).val()}</h2>`);
+	$(this).replaceWith(`<h2 class="card-title">${$(this).val()}</h2>`);
 	var ideaCard = extractCard(this);
 	$(this).closest('article').replaceWith(populateCard(ideaCard));
 	sendToLocalStorage();
