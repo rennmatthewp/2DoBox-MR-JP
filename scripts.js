@@ -78,7 +78,7 @@ $('.search').on('keyup', realtimeSearch)
 //collects title and body, runs constructor
 function formSubmit() {
 	var title = $('.title-input').val();
-	var idea = $('.idea-input').val();
+	var idea = $('.body-input').val();
 	var ideaCard = new IdeaCard(title, idea);
 	$('section').prepend(populateCard(ideaCard)); 
 	resetHeader();
@@ -199,7 +199,7 @@ function getStoredCards() {
 function resetHeader() {
 	$('.title-input').focus();
 	$('.title-input').val('');
-	$('.idea-input').val('');
+	$('.body-input').val('');
 };
 
 //runs .doYouMatch prototype and adds or removes class to display search matches
