@@ -5,36 +5,36 @@ $(document).ready(function() {
 });
 
 //constructor function and prototypes
-var ToDoCard = function(title, body, id = Date.now(), quality = 2) {
+var ToDoCard = function(title, body, id = Date.now(), importance = 2) {
 	this.title = title;
 	this.body = body;
 	this.id = id;
-	this.quality = quality;
+	this.importance = importance;
 };
 
 //connects the quailty index to the string in that index
-ToDoCard.prototype.qualityString = function() {
-	var qualityArray = ['none', 'Low', 'Normal', 'High', 'Critical'];
-	return qualityArray[this.quality];
+ToDoCard.prototype.importanceString = function() {
+	var importanceArray = ['None', 'Low', 'Normal', 'High', 'Critical'];
+	return importanceArray[this.importance];
 };
 
-//increments the quality value
-ToDoCard.prototype.qualityIncrement = function() {
-	if (this.quality < 4) {
-		this.quality++;
+//increments the importance value
+ToDoCard.prototype.importanceIncrement = function() {
+	if (this.importance < 4) {
+		this.importance++;
 	}
 };
 
-//decrements the quality value
-ToDoCard.prototype.qualityDecrement = function() {
-	if (this.quality > 0) {
-		this.quality--;
+//decrements the importance value
+ToDoCard.prototype.importanceDecrement = function() {
+	if (this.importance > 0) {
+		this.importance--;
 	}
 };
 
-//checks for matches in title, body and quality in the search input
+//checks for matches in title, body and importance in the search input
 ToDoCard.prototype.doYouMatch = function(searchTerm) {
-	if (this.title.toUpperCase().includes(searchTerm) || this.body.toUpperCase().includes(searchTerm) || this.qualityString().toUpperCase().includes(searchTerm)) {
+	if (this.title.toUpperCase().includes(searchTerm) || this.body.toUpperCase().includes(searchTerm) || this.importanceString().toUpperCase().includes(searchTerm)) {
 		return true;
 	} else {
 		return false;
@@ -91,8 +91,8 @@ function extractCard(elementInsideArticle) {
 	var title = $('.card-title', article).text();
 	var body = $('.body', article).text();
 	var id = article.data('id');
-	var quality = $('.quality-span', article).data('quality');
-	var toDoCard = new ToDoCard(title, body, id, quality);
+	var importance = $('.importance-span', article).data('importance');
+	var toDoCard = new ToDoCard(title, body, id, importance);
 	return toDoCard;
 };
 
@@ -101,7 +101,7 @@ function populateCard(toDoCard) {
 	var newTitle = toDoCard.title;
 	var newBody = toDoCard.body;
 	var newId = toDoCard.id;
-	var newQuality = toDoCard.qualityString();
+	var newImportance = toDoCard.importanceString();
 	return (`<article data-id="${newId}">
 				<div class="h2-wrapper">
 					<h2 class="card-title">${newTitle}</h2>
@@ -112,7 +112,7 @@ function populateCard(toDoCard) {
 					</button>
 				</div>
 				<p class="body">${newBody}</p>
-				<div class="quality-wrapper">
+				<div class="importance-wrapper">
 					<button class="upvote-button">
 						<div class="upvote-front">
 							<img src="assets/upvote.svg">
@@ -123,24 +123,22 @@ function populateCard(toDoCard) {
 							<img src="assets/downvote.svg">
 						</div>
 					</button>
-					<h5 class="quality">quality: <span data-quality="${toDoCard.quality}" class="quality-span">${newQuality}</span></h5>
+					<h5 class="importance">Importance: <span data-importance="${toDoCard.importance}" class="importance-span">${newImportance}</span></h5>
 				</div>
 				<hr>
 			</article>`);
 };
 
-//replaces the quality string and saves quality
 function upvoteCard() {
  	var toDoCard = extractCard(this);
-	toDoCard.qualityIncrement();
+	toDoCard.importanceIncrement();
 	$(this).closest('article').replaceWith(populateCard(toDoCard));
 	sendToLocalStorage();
 };
 
-//replaces quality string and saves quality
 function downvoteCard() {
  	var toDoCard = extractCard(this);
-	toDoCard.qualityDecrement();
+	toDoCard.importanceDecrement();
 	$(this).closest('article').replaceWith(populateCard(toDoCard));
 	sendToLocalStorage();
 };
@@ -190,7 +188,7 @@ function sendToLocalStorage() {
 function getStoredCards() {
 	var retrievedCards = JSON.parse(localStorage.getItem("storedCards")) || [];
 	retrievedCards.forEach(function (retrievedCard) {
-		var toDoCard = new ToDoCard(retrievedCard.title, retrievedCard.body, retrievedCard.id, retrievedCard.quality);
+		var toDoCard = new ToDoCard(retrievedCard.title, retrievedCard.body, retrievedCard.id, retrievedCard.importance);
 		$('section').append(populateCard(toDoCard));
 	});
 };
