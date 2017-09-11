@@ -15,7 +15,7 @@ var ToDoCard = function(title, body, id = Date.now(), quality = 0) {
 //connects the quailty index to the string in that index
 ToDoCard.prototype.qualityString = function() {
 	var qualityArray = ['swill', 'plausible', 'genius'];
-	return qualityArray[this.quality]; //this = IdeaCard
+	return qualityArray[this.quality];
 };
 
 //increments the quality value
@@ -55,11 +55,11 @@ $('section').on('click', '.delete-button', deleteCard);
 
 $('section').on('click', 'h2', editTitle);
 
-$('section').on('click', 'p', editIdea);
+$('section').on('click', 'p', editBody);
 
 $('section').on('focusout', '.edit-title', editTitleSave);
 
-$('section').on('focusout', '.edit-idea', editIdeaSave);
+$('section').on('focusout', '.edit-body', editBodySave);
 
 $('section').on('keyup', '.edit-title', function(e) {
 	if (e.keyCode === 13) {
@@ -67,7 +67,7 @@ $('section').on('keyup', '.edit-title', function(e) {
 	}
 });
 
-$('section').on('keyup', '.edit-idea', function(e) {
+$('section').on('keyup', '.edit-body', function(e) {
 	if (e.keyCode === 13) {
 		$(this).blur();
 	}
@@ -85,7 +85,7 @@ function formSubmit() {
 	sendToLocalStorage();
 };
 
-//extracts values from HTML, inputs those values to constructor function which creates an ideaCard
+//extracts values from HTML, inputs those values to constructor function which creates an toDoCard
 function extractCard(elementInsideArticle) {
 	var article = $(elementInsideArticle).closest('article');
 	var title = $('.card-title', article).text();
@@ -131,17 +131,17 @@ function populateCard(toDoCard) {
 
 //replaces the quality string and saves quality
 function upvoteCard() {
- 	var ideaCard = extractCard(this);
-	ideaCard.qualityIncrement();
-	$(this).closest('article').replaceWith(populateCard(ideaCard));
+ 	var toDoCard = extractCard(this);
+	toDoCard.qualityIncrement();
+	$(this).closest('article').replaceWith(populateCard(toDoCard));
 	sendToLocalStorage();
 };
 
 //replaces quality string and saves quality
 function downvoteCard() {
- 	var ideaCard = extractCard(this);
-	ideaCard.qualityDecrement();
-	$(this).closest('article').replaceWith(populateCard(ideaCard));
+ 	var toDoCard = extractCard(this);
+	toDoCard.qualityDecrement();
+	$(this).closest('article').replaceWith(populateCard(toDoCard));
 	sendToLocalStorage();
 };
 
@@ -151,30 +151,30 @@ function deleteCard(e) {
 	sendToLocalStorage();
 };
 
-//edits and saves title and idea
+//edits and saves title and body
 function editTitle() {
 	var article = $(this).closest('article');
 	$('h2', article).replaceWith(`<textarea class="card-title edit-title">${$(this).text()}</textarea>`);
 	$('.edit-title').focus();
 };
 
-function editIdea() {
+function editBody() {
 	var article = $(this).closest('article');
-	$('p', article).replaceWith(`<textarea class="body edit-idea">${$(this).text()}</textarea>`);
-	$('.edit-idea').focus();
+	$('p', article).replaceWith(`<textarea class="body edit-body">${$(this).text()}</textarea>`);
+	$('.edit-body').focus();
 };
 
 function editTitleSave() {
 	$(this).replaceWith(`<h2 class="card-title">${$(this).val()}</h2>`);
-	var ideaCard = extractCard(this);
-	$(this).closest('article').replaceWith(populateCard(ideaCard));
+	var toDoCard = extractCard(this);
+	$(this).closest('article').replaceWith(populateCard(toDoCard));
 	sendToLocalStorage();
 };
 
-function editIdeaSave() {
+function editBodySave() {
 	$(this).replaceWith(`<p class="body">${$(this).val()}</p>`);
-	var ideaCard = extractCard(this);
-	$(this).closest('article').replaceWith(populateCard(ideaCard));
+	var toDoCard = extractCard(this);
+	$(this).closest('article').replaceWith(populateCard(toDoCard));
 	sendToLocalStorage();
 };
 
@@ -190,8 +190,8 @@ function sendToLocalStorage() {
 function getStoredCards() {
 	var retrievedCards = JSON.parse(localStorage.getItem("storedCards")) || [];
 	retrievedCards.forEach(function (retrievedCard) {
-		var ideaCard = new ToDoCard(retrievedCard.title, retrievedCard.body, retrievedCard.id, retrievedCard.quality);
-		$('section').append(populateCard(ideaCard));
+		var toDoCard = new ToDoCard(retrievedCard.title, retrievedCard.body, retrievedCard.id, retrievedCard.quality);
+		$('section').append(populateCard(toDoCard));
 	});
 };
 
@@ -206,8 +206,8 @@ function resetHeader() {
 function realtimeSearch() {
 	var searchTerm = $('.search').val().toUpperCase();
 	$('article').each(function (index, element) {
-		var ideaCard = extractCard(element);
-		if (ideaCard.doYouMatch(searchTerm)) {
+		var toDoCard = extractCard(element);
+		if (toDoCard.doYouMatch(searchTerm)) {
 			$(element).removeClass('card-display-none');
 		} else {
 			$(element).addClass('card-display-none');
