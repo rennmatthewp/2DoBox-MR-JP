@@ -1,15 +1,22 @@
+/*
+colors
+burnt orange #ff6e40;
+amber: #ffc400;
+brown: #8d6e63;
+
+*/
 *:focus {
 	box-shadow: 0 0 3px #00a79d;
-	outline: 1px solid #00a79d;
-}
+/*	outline: 1px solid #4C5760;
+*/}
 
 header {
-	 background-color: #e5f3f2;
+	 background-color: #93A8AC;
 	 padding: 45px 22.5px 27px;
 }
 
 h1 {
-	color: #00a79d;
+	color: #DAD2B9;
 	font-family: Roboto Slab;
 	font-size: 60px;
 	font-weight: 700;
@@ -18,7 +25,7 @@ h1 {
 }
 
 h1 span {
-	color: #6d6e71;
+	color: #4C5760;
 }
 
 form {
@@ -26,8 +33,6 @@ form {
 	flex-direction: column;
 	justify-content: center;
 }
-
-
 
 .save-button:hover {
 	background-color: #045e55;
@@ -61,6 +66,7 @@ section {
 	font-size: 22.5px;
 	height: 31.5px;
 	margin: 9px auto;
+	outline-color: #4C5760;
 	width: 582px;
 }
 
@@ -69,7 +75,7 @@ section {
 }
 
 .save-button {
-	background-color: #00a79d;
+	background-color: #4C5760;
 	border: none;
 	color: #fff;
 	cursor: pointer;
