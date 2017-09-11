@@ -5,7 +5,7 @@ $(document).ready(function() {
 });
 
 //constructor function and prototypes
-var ToDoCard = function(title, body, id = Date.now(), quality = 0) {
+var ToDoCard = function(title, body, id = Date.now(), quality = 2) {
 	this.title = title;
 	this.body = body;
 	this.id = id;
@@ -14,13 +14,13 @@ var ToDoCard = function(title, body, id = Date.now(), quality = 0) {
 
 //connects the quailty index to the string in that index
 ToDoCard.prototype.qualityString = function() {
-	var qualityArray = ['swill', 'plausible', 'genius'];
+	var qualityArray = ['none', 'Low', 'Normal', 'High', 'Critical'];
 	return qualityArray[this.quality];
 };
 
 //increments the quality value
 ToDoCard.prototype.qualityIncrement = function() {
-	if (this.quality < 2) {
+	if (this.quality < 4) {
 		this.quality++;
 	}
 };
