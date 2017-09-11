@@ -5,9 +5,9 @@ $(document).ready(function() {
 });
 
 //constructor function and prototypes
-var ToDoCard = function(title, idea, id = Date.now(), quality = 0) {
+var ToDoCard = function(title, body, id = Date.now(), quality = 0) {
 	this.title = title;
-	this.idea = idea;
+	this.body = body;
 	this.id = id; 
 	this.quality = quality;
 };
@@ -34,7 +34,7 @@ ToDoCard.prototype.qualityDecrement = function() {
 
 //checks for matches in title, body and quality in the search input
 ToDoCard.prototype.doYouMatch = function(searchTerm) {
-	if (this.title.toUpperCase().includes(searchTerm) || this.idea.toUpperCase().includes(searchTerm) || this.qualityString().toUpperCase().includes(searchTerm)) {
+	if (this.title.toUpperCase().includes(searchTerm) || this.body.toUpperCase().includes(searchTerm) || this.qualityString().toUpperCase().includes(searchTerm)) {
 		return true;
 	} else {
 		return false;
@@ -78,8 +78,8 @@ $('.search').on('keyup', realtimeSearch)
 //collects title and body, runs constructor
 function formSubmit() {
 	var title = $('.title-input').val();
-	var idea = $('.body-input').val();
-	var ideaCard = new ToDoCard(title, idea);
+	var body = $('.body-input').val();
+	var ideaCard = new ToDoCard(title, body);
 	$('section').prepend(populateCard(ideaCard)); 
 	resetHeader();
 	sendToLocalStorage();
@@ -89,17 +89,17 @@ function formSubmit() {
 function extractCard(elementInsideArticle) {
 	var article = $(elementInsideArticle).closest('article');
 	var title = $('.idea-title', article).text();
-	var idea = $('.idea-body', article).text();
+	var body = $('.idea-body', article).text();
 	var id = article.data('id');
 	var quality = $('.quality-span', article).data('quality');
-	var ideaCard = new ToDoCard(title, idea, id, quality);
+	var ideaCard = new ToDoCard(title, body, id, quality);
 	return ideaCard;
 };
 
 //takes values from ideaCard and inserts those values to HTML
 function populateCard(ideaCard) {
 	var newTitle = ideaCard.title;
-	var newIdea = ideaCard.idea;
+	var newIdea = ideaCard.body;
 	var newId = ideaCard.id;
 	var newQuality = ideaCard.qualityString();
 	return (`<article data-id="${newId}" class="idea-card">  
@@ -190,7 +190,7 @@ function sendToLocalStorage() {
 function getStoredCards() {
 	var retrievedCards = JSON.parse(localStorage.getItem("storedCards")) || [];
 	retrievedCards.forEach(function (retrievedCard) {
-		var ideaCard = new ToDoCard(retrievedCard.title, retrievedCard.idea, retrievedCard.id, retrievedCard.quality);
+		var ideaCard = new ToDoCard(retrievedCard.title, retrievedCard.body, retrievedCard.id, retrievedCard.quality);
 		$('section').append(populateCard(ideaCard)); 
 	});
 };
