@@ -88,7 +88,7 @@ function formSubmit() {
 //extracts values from HTML, inputs those values to constructor function which creates an ideaCard
 function extractCard(elementInsideArticle) {
 	var article = $(elementInsideArticle).closest('article');
-	var title = $('.idea-title', article).text();
+	var title = $('.card-title', article).text();
 	var body = $('.body', article).text();
 	var id = article.data('id');
 	var quality = $('.quality-span', article).data('quality');
@@ -102,9 +102,9 @@ function populateCard(toDoCard) {
 	var newBody = toDoCard.body;
 	var newId = toDoCard.id;
 	var newQuality = toDoCard.qualityString();
-	return (`<article data-id="${newId}" class="idea-card">
+	return (`<article data-id="${newId}">
 				<div class="h2-wrapper">
-					<h2 class="idea-title">${newTitle}</h2>
+					<h2 class="card-title">${newTitle}</h2>
 					<button class="delete-button">
 						<div class="delete-front">
 							<img src="assets/delete.svg">
@@ -154,7 +154,7 @@ function deleteCard(e) {
 //edits and saves title and idea
 function editTitle() {
 	var article = $(this).closest('article');
-	$('h2', article).replaceWith(`<textarea class="idea-title edit-title">${$(this).text()}</textarea>`);
+	$('h2', article).replaceWith(`<textarea class="card-title edit-title">${$(this).text()}</textarea>`);
 	$('.edit-title').focus();
 };
 
@@ -165,7 +165,7 @@ function editIdea() {
 };
 
 function editTitleSave() {
-	$(this).replaceWith(`<h2 class="idea-title">${$(this).val()}</h2>`);
+	$(this).replaceWith(`<h2 class="card-title">${$(this).val()}</h2>`);
 	var ideaCard = extractCard(this);
 	$(this).closest('article').replaceWith(populateCard(ideaCard));
 	sendToLocalStorage();
