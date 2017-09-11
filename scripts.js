@@ -5,7 +5,7 @@ $(document).ready(function() {
 });
 
 //constructor function and prototypes
-var IdeaCard = function(title, idea, id = Date.now(), quality = 0) {
+var ToDoCard = function(title, idea, id = Date.now(), quality = 0) {
 	this.title = title;
 	this.idea = idea;
 	this.id = id; 
@@ -13,27 +13,27 @@ var IdeaCard = function(title, idea, id = Date.now(), quality = 0) {
 };
 
 //connects the quailty index to the string in that index
-IdeaCard.prototype.qualityString = function() {
+ToDoCard.prototype.qualityString = function() {
 	var qualityArray = ['swill', 'plausible', 'genius'];
 	return qualityArray[this.quality]; //this = IdeaCard
 };
 
 //increments the quality value
-IdeaCard.prototype.qualityIncrement = function() { 
+ToDoCard.prototype.qualityIncrement = function() { 
 	if (this.quality < 2) {
 		this.quality++;
 	}
 };
 
 //decrements the quality value
-IdeaCard.prototype.qualityDecrement = function() {
+ToDoCard.prototype.qualityDecrement = function() {
 	if (this.quality > 0) {
 		this.quality--;
 	}
 };
 
 //checks for matches in title, body and quality in the search input
-IdeaCard.prototype.doYouMatch = function(searchTerm) {
+ToDoCard.prototype.doYouMatch = function(searchTerm) {
 	if (this.title.toUpperCase().includes(searchTerm) || this.idea.toUpperCase().includes(searchTerm) || this.qualityString().toUpperCase().includes(searchTerm)) {
 		return true;
 	} else {
@@ -79,7 +79,7 @@ $('.search').on('keyup', realtimeSearch)
 function formSubmit() {
 	var title = $('.title-input').val();
 	var idea = $('.body-input').val();
-	var ideaCard = new IdeaCard(title, idea);
+	var ideaCard = new ToDoCard(title, idea);
 	$('section').prepend(populateCard(ideaCard)); 
 	resetHeader();
 	sendToLocalStorage();
@@ -92,7 +92,7 @@ function extractCard(elementInsideArticle) {
 	var idea = $('.idea-body', article).text();
 	var id = article.data('id');
 	var quality = $('.quality-span', article).data('quality');
-	var ideaCard = new IdeaCard(title, idea, id, quality);
+	var ideaCard = new ToDoCard(title, idea, id, quality);
 	return ideaCard;
 };
 
@@ -190,7 +190,7 @@ function sendToLocalStorage() {
 function getStoredCards() {
 	var retrievedCards = JSON.parse(localStorage.getItem("storedCards")) || [];
 	retrievedCards.forEach(function (retrievedCard) {
-		var ideaCard = new IdeaCard(retrievedCard.title, retrievedCard.idea, retrievedCard.id, retrievedCard.quality);
+		var ideaCard = new ToDoCard(retrievedCard.title, retrievedCard.idea, retrievedCard.id, retrievedCard.quality);
 		$('section').append(populateCard(ideaCard)); 
 	});
 };
