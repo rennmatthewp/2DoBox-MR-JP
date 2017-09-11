@@ -169,21 +169,21 @@ textarea {
 	background-image: url("../assets/delete-hover.svg");
 }
 
-.upvote-button, .downvote-button, .quality {
+.upvote-button, .downvote-button, .importance {
 	margin-right: 22.5px;
 }
 
-.quality-wrapper {
+.importance-wrapper {
 	display: flex;
 }
 
-.quality {
+.importance {
 	color: #626e71;
 	font-size: 21px;
 	margin-top: 3px;
 }
 
-.quality-span {
+.importance-span {
 	font-family: Open Sans;
 }
 
