@@ -79,8 +79,8 @@ $('.search').on('keyup', realtimeSearch)
 function formSubmit() {
 	var title = $('.title-input').val();
 	var body = $('.body-input').val();
-	var ideaCard = new ToDoCard(title, body);
-	$('section').prepend(populateCard(ideaCard));
+	var toDoCard = new ToDoCard(title, body);
+	$('section').prepend(populateCard(toDoCard));
 	resetHeader();
 	sendToLocalStorage();
 };
@@ -92,16 +92,16 @@ function extractCard(elementInsideArticle) {
 	var body = $('.body', article).text();
 	var id = article.data('id');
 	var quality = $('.quality-span', article).data('quality');
-	var ideaCard = new ToDoCard(title, body, id, quality);
-	return ideaCard;
+	var toDoCard = new ToDoCard(title, body, id, quality);
+	return toDoCard;
 };
 
-//takes values from ideaCard and inserts those values to HTML
-function populateCard(ideaCard) {
-	var newTitle = ideaCard.title;
-	var newBody = ideaCard.body;
-	var newId = ideaCard.id;
-	var newQuality = ideaCard.qualityString();
+//takes values from toDoCard and inserts those values to HTML
+function populateCard(toDoCard) {
+	var newTitle = toDoCard.title;
+	var newBody = toDoCard.body;
+	var newId = toDoCard.id;
+	var newQuality = toDoCard.qualityString();
 	return (`<article data-id="${newId}" class="idea-card">
 				<div class="h2-wrapper">
 					<h2 class="idea-title">${newTitle}</h2>
@@ -123,7 +123,7 @@ function populateCard(ideaCard) {
 							<img src="assets/downvote.svg">
 						</div>
 					</button>
-					<h5 class="quality">quality: <span data-quality="${ideaCard.quality}" class="quality-span">${newQuality}</span></h5>
+					<h5 class="quality">quality: <span data-quality="${toDoCard.quality}" class="quality-span">${newQuality}</span></h5>
 				</div>
 				<hr>
 			</article>`);
