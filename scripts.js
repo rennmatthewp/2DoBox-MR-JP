@@ -105,25 +105,15 @@ function populateCard(toDoCard) {
 	return (`<article data-id="${newId}">
 				<div class="h2-wrapper">
 					<h2 class="card-title">${newTitle}</h2>
-					<button class="delete-button">
-						<div class="delete-front">
-							<img src="assets/delete.svg">
-						</div>
-					</button>
+					<button class="delete-button"></button>
 				</div>
 				<p class="body">${newBody}</p>
 				<div class="importance-wrapper">
-					<button class="upvote-button">
-						<div class="upvote-front">
-							<img src="assets/upvote.svg">
-						</div>
-					</button>
-					<button class="downvote-button">
-						<div class="downvote-front">
-							<img src="assets/downvote.svg">
-						</div>
-					</button>
-					<h5 class="importance">Importance: <span data-importance="${toDoCard.importance}" class="importance-span">${newImportance}</span></h5>
+					<button class="upvote-button"></button>
+					<button class="downvote-button"></button>
+					<h5 class="importance">Importance:
+						<span data-importance="${toDoCard.importance}" class="importance-span">${newImportance}</span>
+					</h5>
 				</div>
 				<hr>
 			</article>`);
