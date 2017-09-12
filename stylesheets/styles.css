@@ -30,7 +30,7 @@ form {
 
 .save-button:hover {
 	background-color: #045e55;
-	transition: background-color .3s ease;
+	transition: all .3s ease;
 }
 
 .save-button:focus {
@@ -54,7 +54,10 @@ section {
 	width: 582px;
 }
 
-.title-input, .body-input, .save-button, .search {
+.title-input,
+.body-input,
+.save-button,
+.search {
 	border: 1.5px solid #d1d3d4;
 	display: block;
 	font-size: 22.5px;
@@ -79,14 +82,16 @@ section {
 	width: 587px;
 }
 
-h2, .edit-title {
+h2,
+.edit-title {
 	color: #6d6e71;
 	font-family: Roboto Slab;
 	font-size: 24px;
 	font-weight: 700;
 }
 
-h2, .body {
+h2,
+.body {
 	overflow-wrap: break-word;
 }
 
@@ -99,7 +104,8 @@ h5 {
 	font-family: Roboto Slab;
 }
 
-p, .edit-body {
+p,
+.edit-body {
 	color: #939598;
 	font-family: Open Sans;
 	font-size: 21px;
@@ -115,7 +121,8 @@ hr {
 	margin-top: 27px;
 }
 
-.body, .card-title {
+.body,
+.card-title {
 	cursor: pointer;
 }
 
@@ -126,24 +133,6 @@ textarea {
 	resize: vertical;
 	width: 582px;
 	z-index: 1;
-}
-
-.upvote-front,
-.downvote-front,
-.delete-front {
-	background-color: #fff;
-	border: none;
-	cursor: pointer;
-	padding: 0;
-	transition: all .3s ease;
-	width: 31px;
-}
-
-.upvote-front:hover,
-.downvote-front:hover,
-.delete-front:hover {
-	opacity: 0;
-	transition: all .3s ease;
 }
 
 .upvote-button,
@@ -158,18 +147,41 @@ textarea {
 }
 
 .upvote-button {
+	background-image: url("../assets/upvote.svg");
+	transition: all ease 300ms;
+}
+
+.upvote-button:hover {
 	background-image: url("../assets/upvote-hover.svg");
+	cursor: pointer;
+	transition: all ease 300ms;
 }
 
 .downvote-button {
+	background-image: url("../assets/downvote.svg");
+	transition: all ease 300ms;
+}
+
+.downvote-button:hover {
 	background-image: url("../assets/downvote-hover.svg");
+	cursor: pointer;
+	transition: all ease 300ms;
 }
 
 .delete-button {
-	background-image: url("../assets/delete-hover.svg");
+	background-image: url("../assets/delete.svg");
+	transition: all ease 300ms;
 }
 
-.upvote-button, .downvote-button, .importance {
+.delete-button:hover {
+	background-image: url("../assets/delete-hover.svg");
+	cursor: pointer;
+	transition: all ease 300ms;
+}
+
+.upvote-button,
+.downvote-button,
+.importance {
 	margin-right: 22.5px;
 }
 
@@ -214,7 +226,10 @@ textarea {
 		height: 82px;
 	}
 
-	.title-input, .body-input, .save-button, .search {
+	.title-input,
+	.body-input,
+	.save-button,
+	.search {
 		margin-left: 0;
 		margin-right: 0;
 		padding: 0;
