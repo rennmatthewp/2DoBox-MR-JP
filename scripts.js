@@ -1,8 +1,35 @@
+$('section').on('click', '.upvote-button', upvoteCard);
+$('section').on('click', '.downvote-button', downvoteCard);
+$('section').on('click', '.delete-button', deleteCard);
+$('section').on('click', 'h2', editTitle);
+$('section').on('click', 'p', editBody);
+$('section').on('focusout', '.edit-title', editTitleSave);
+$('section').on('focusout', '.edit-body', editBodySave);
+$('section').on('keyup', '.edit-title', function(e) {
+	if (e.keyCode === 13) {
+		$(this).blur();
+	}
+});
+$('section').on('keyup', '.edit-body', function(e) {
+	if (e.keyCode === 13) {
+		$(this).blur();
+	}
+});
+$('.search').on('keyup', realtimeSearch)
+
 //setting focus in title input, retrieve local storage
 $(document).ready(function() {
 	$('.title-input').focus();
 	getStoredCards();
 });
+
+function enableSaveButton() {
+  if($('.title-input').val() !== "" && $('.body-input').val() !== "") {
+    saveButton.removeAttr('disabled');
+  } else {
+    saveButton.attr('disabled', true)
+  }
+};
 
 //constructor function and prototypes
 var ToDoCard = function(title, body, id = Date.now(), importance = 2) {
@@ -47,33 +74,6 @@ $('.save-button').on('click', function(e) {
 	formSubmit();
 });
 
-$('section').on('click', '.upvote-button', upvoteCard);
-
-$('section').on('click', '.downvote-button', downvoteCard);
-
-$('section').on('click', '.delete-button', deleteCard);
-
-$('section').on('click', 'h2', editTitle);
-
-$('section').on('click', 'p', editBody);
-
-$('section').on('focusout', '.edit-title', editTitleSave);
-
-$('section').on('focusout', '.edit-body', editBodySave);
-
-$('section').on('keyup', '.edit-title', function(e) {
-	if (e.keyCode === 13) {
-		$(this).blur();
-	}
-});
-
-$('section').on('keyup', '.edit-body', function(e) {
-	if (e.keyCode === 13) {
-		$(this).blur();
-	}
-});
-
-$('.search').on('keyup', realtimeSearch)
 
 //collects title and body, runs constructor
 function formSubmit() {
