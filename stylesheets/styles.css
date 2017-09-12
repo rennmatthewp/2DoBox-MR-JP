@@ -30,7 +30,7 @@ form {
 
 .save-button:hover {
 	background-color: #045e55;
-	transition: background-color .3s ease;
+	transition: all .3s ease;
 }
 
 .save-button:focus {
@@ -148,30 +148,35 @@ textarea {
 
 .upvote-button {
 	background-image: url("../assets/upvote.svg");
+	transition: all ease 300ms;
 }
 
 .upvote-button:hover {
 	background-image: url("../assets/upvote-hover.svg");
 	cursor: pointer;
-
+	transition: all ease 300ms;
 }
 
 .downvote-button {
 	background-image: url("../assets/downvote.svg");
+	transition: all ease 300ms;
 }
 
 .downvote-button:hover {
 	background-image: url("../assets/downvote-hover.svg");
 	cursor: pointer;
+	transition: all ease 300ms;
 }
 
 .delete-button {
 	background-image: url("../assets/delete.svg");
+	transition: all ease 300ms;
 }
 
 .delete-button:hover {
 	background-image: url("../assets/delete-hover.svg");
 	cursor: pointer;
+	transition: all ease 300ms;
 }
 
 .upvote-button,
