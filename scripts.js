@@ -121,6 +121,7 @@ function populateCard(toDoCard) {
 					<h5 class="importance">Importance:
 						<span data-importance="${toDoCard.importance}" class="importance-span">${newImportance}</span>
 					</h5>
+					<button class="completed-button"></button>
 				</div>
 			</article>`);
 	$(section).empty();
@@ -185,7 +186,7 @@ function sendToLocalStorage() {
 
 function getStoredCards() {
 	var retrievedCards = JSON.parse(localStorage.getItem("storedCards")) || [];
-	
+
 	appendCards(retrievedCards);
 	// retrievedCards.forEach(function (retrievedCard) {
 	// 	var toDoCard = new ToDoCard(retrievedCard.title, retrievedCard.body, retrievedCard.id, retrievedCard.importance);
@@ -240,12 +241,12 @@ function showCards(n){
 			if (i < n){
 				$($('article')[i]).show();
 			}else{
-				$($('article')[i]).hide();	
+				$($('article')[i]).hide();
 			}
 		}
 };
 
-// function for marking tasks completed 
+// function for marking tasks completed
 
 ToDoCard.completed = function() {
 	$('.completed').on('click', )
@@ -265,7 +266,7 @@ function filterCritical() {
 	var storedCards = JSON.parse(localStorage.getItem('storedCards'));
 	var criticalCards = storedCards.filter(function(card){
 		return card.importance === 4;
-	}) 
+	})
 	$('section').empty()
 	appendCards(criticalCards);
 }
@@ -273,7 +274,7 @@ function filterHigh() {
 	var storedCards = JSON.parse(localStorage.getItem('storedCards'));
 	var highCards = storedCards.filter(function(card){
 		return card.importance === 3;
-	}) 
+	})
 	$('section').empty()
 	appendCards(highCards);
 }
@@ -281,7 +282,7 @@ function filterNormal() {
 	var storedCards = JSON.parse(localStorage.getItem('storedCards'));
 	var normalCards = storedCards.filter(function(card){
 		return card.importance === 2;
-	}) 
+	})
 	$('section').empty()
 	appendCards(normalCards);
 }
@@ -289,7 +290,7 @@ function filterLow() {
 	var storedCards = JSON.parse(localStorage.getItem('storedCards'));
 	var lowCards = storedCards.filter(function(card){
 		return card.importance === 1;
-	}) 
+	})
 	$('section').empty()
 	appendCards(lowCards);
 }
@@ -297,7 +298,7 @@ function filterNone() {
 	var storedCards = JSON.parse(localStorage.getItem('storedCards'));
 	var noneCards = storedCards.filter(function(card){
 		return card.importance === 0;
-	}) 
+	})
 	$('section').empty()
 	appendCards(noneCards);
 }
