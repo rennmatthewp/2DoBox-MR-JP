@@ -26,6 +26,8 @@ $('section').on('keyup', '.edit-body', function(e) {
 });
 
 
+
+
 //setting focus in title input, retrieve local storage
 
 function enableSaveButton() {
@@ -121,6 +123,8 @@ function populateCard(toDoCard) {
 					</h5>
 				</div>
 			</article>`);
+	$(section).empty();
+	showCards(10);
 };
 
 function upvoteCard() {
@@ -181,11 +185,20 @@ function sendToLocalStorage() {
 
 function getStoredCards() {
 	var retrievedCards = JSON.parse(localStorage.getItem("storedCards")) || [];
-	retrievedCards.forEach(function (retrievedCard) {
-		var toDoCard = new ToDoCard(retrievedCard.title, retrievedCard.body, retrievedCard.id, retrievedCard.importance);
+	
+	appendCards(retrievedCards);
+	// retrievedCards.forEach(function (retrievedCard) {
+	// 	var toDoCard = new ToDoCard(retrievedCard.title, retrievedCard.body, retrievedCard.id, retrievedCard.importance);
+	// 	$('section').append(populateCard(toDoCard));
+	// });
+};
+
+function appendCards (arr){
+	arr.forEach(function (card) {
+		var toDoCard = new ToDoCard(card.title, card.body, card.id, card.importance);
 		$('section').append(populateCard(toDoCard));
 	});
-};
+}
 
 //resets inpus and focus after save
 function resetHeader() {
@@ -219,7 +232,7 @@ function showMore(){
 	var cardCount = $('article').length;
 	console.log(cardCount);
 	showCards(cardCount);
-}
+};
 
 function showCards(n){
 	var cardLength = $('article').length;
@@ -230,4 +243,61 @@ function showCards(n){
 				$($('article')[i]).hide();	
 			}
 		}
+};
+
+// function for marking tasks completed 
+
+ToDoCard.completed = function() {
+	$('.completed').on('click', )
+}
+
+function addCompletedClass() {
+
+}
+
+$('.critical-button').on('click', filterCritical)
+$('.high-button').on('click', filterHigh)
+$('.normal-button').on('click', filterNormal)
+$('.low-button').on('click', filterLow)
+$('.none-button').on('click', filterNone)
+
+function filterCritical() {
+	var storedCards = JSON.parse(localStorage.getItem('storedCards'));
+	var criticalCards = storedCards.filter(function(card){
+		return card.importance === 4;
+	}) 
+	$('section').empty()
+	appendCards(criticalCards);
+}
+function filterHigh() {
+	var storedCards = JSON.parse(localStorage.getItem('storedCards'));
+	var highCards = storedCards.filter(function(card){
+		return card.importance === 3;
+	}) 
+	$('section').empty()
+	appendCards(highCards);
+}
+function filterNormal() {
+	var storedCards = JSON.parse(localStorage.getItem('storedCards'));
+	var normalCards = storedCards.filter(function(card){
+		return card.importance === 2;
+	}) 
+	$('section').empty()
+	appendCards(normalCards);
+}
+function filterLow() {
+	var storedCards = JSON.parse(localStorage.getItem('storedCards'));
+	var lowCards = storedCards.filter(function(card){
+		return card.importance === 1;
+	}) 
+	$('section').empty()
+	appendCards(lowCards);
+}
+function filterNone() {
+	var storedCards = JSON.parse(localStorage.getItem('storedCards'));
+	var noneCards = storedCards.filter(function(card){
+		return card.importance === 0;
+	}) 
+	$('section').empty()
+	appendCards(noneCards);
 }
