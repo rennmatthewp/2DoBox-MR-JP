@@ -28,6 +28,13 @@ form {
 	justify-content: center;
 }
 
+article {
+	border-bottom: 1.5px solid #d1d3d4;
+	margin-bottom: 27px;
+	margin-top: 27px;
+	padding-bottom: 20px;
+}
+
 .save-button:hover {
 	background-color: #045e55;
 	transition: all .3s ease;
@@ -161,12 +168,6 @@ p,
 	margin-top: 9px;
 }
 
-hr {
-	border: 1.5px solid #d1d3d4;
-	margin-bottom: 24px;
-	margin-top: 27px;
-}
-
 .body,
 .card-title {
 	cursor: pointer;
@@ -247,6 +248,16 @@ textarea {
 
 .card-display-none {
 	display: none;
+}
+
+.show-button {
+	border: none;
+	color: #fff;
+	display: block;
+	height: 30px;
+	width: 200px;
+	margin: 0 auto;
+	background-color: #4C5760;
 }
 
 @media screen and (max-width: 655px) {

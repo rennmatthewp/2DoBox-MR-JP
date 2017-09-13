@@ -1,3 +1,4 @@
+($('.title-input'), $('.body-input')).on('keyup', enableSaveButton);
 $('section').on('click', '.upvote-button', upvoteCard);
 $('section').on('click', '.downvote-button', downvoteCard);
 $('section').on('click', '.delete-button', deleteCard);
@@ -27,10 +28,10 @@ $(document).ready(function() {
 });
 
 function enableSaveButton() {
-  if($('.title-input').val() !== "" && $('.body-input').val() !== "") {
-    saveButton.removeAttr('disabled');
+  if ($('.title-input').val() !== "" && $('.body-input').val() !== "") {
+    $('.save-button').prop('disabled', false);
   } else {
-    saveButton.attr('disabled', true)
+    $('.save-button').prop('disabled', true)
   }
 };
 
@@ -118,7 +119,6 @@ function populateCard(toDoCard) {
 						<span data-importance="${toDoCard.importance}" class="importance-span">${newImportance}</span>
 					</h5>
 				</div>
-				<hr>
 			</article>`);
 };
 
