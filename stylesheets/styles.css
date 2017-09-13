@@ -81,6 +81,7 @@ h5 {
 
 .save-button:disabled {
 	background-color: #DAD2B9;
+	color: #6d6e71;
 	cursor: not-allowed;
 }
 
