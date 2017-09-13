@@ -1,3 +1,8 @@
+$(document).ready(function() {
+	$('.title-input').focus();
+	getStoredCards()
+	showCards(10);
+});
 ($('.title-input'), $('.body-input')).on('keyup', enableSaveButton);
 $('section').on('click', '.upvote-button', upvoteCard);
 $('section').on('click', '.downvote-button', downvoteCard);
@@ -22,10 +27,6 @@ $('section').on('keyup', '.edit-body', function(e) {
 
 
 //setting focus in title input, retrieve local storage
-$(document).ready(function() {
-	$('.title-input').focus();
-	getStoredCards();
-});
 
 function enableSaveButton() {
   if ($('.title-input').val() !== "" && $('.body-input').val() !== "") {
@@ -205,3 +206,28 @@ function realtimeSearch() {
 		};
 	});
 };
+
+function showAllCards(){
+	for (var i = 0 ; i < $('article').length ; i++){
+		($($('article')[i])).show();
+	}
+}
+
+$('.show-button').on('click', showMore)
+
+function showMore(){
+	var cardCount = $('article').length;
+	console.log(cardCount);
+	showCards(cardCount);
+}
+
+function showCards(n){
+	var cardLength = $('article').length;
+		for (var i = 0 ; i < cardLength ; i++){
+			if (i < n){
+				$($('article')[i]).show();
+			}else{
+				$($('article')[i]).hide();	
+			}
+		}
+}
