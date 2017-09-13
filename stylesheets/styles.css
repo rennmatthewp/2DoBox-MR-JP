@@ -66,6 +66,52 @@ section {
 	outline-color: #4C5760;
 	width: 582px;
 }
+.filter-button-wrapper {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: 0 auto 27px;
+	width: 582px;
+}
+
+.filter-button {
+	border: none;
+	color: #626e71;
+	background-color: #d1d3d4;
+	font-size: 17px;
+	width: 88px;
+	height: 30px;
+	transition: background-color, color .3s ease;
+}
+
+.filter-button:hover {
+	transition: all .3s ease;
+}
+
+.none-button:hover {
+	color: #fff;
+	background-color: #4c5760;
+}
+
+.low-button:hover {
+	color: #fff;
+	background-color: #045e55;
+}
+
+.normal-button:hover {
+	color: #fff;
+	background-color: #39b54a; 
+}
+
+.high-button:hover {
+	color: #fff;
+	background-color: #fbb040; 
+}
+
+.critical-button:hover {
+	color: #fff;
+	background-color: #ef4136;
+}
 
 .search {
 	margin-bottom: 42px;
