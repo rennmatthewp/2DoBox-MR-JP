@@ -207,11 +207,11 @@ function realtimeSearch() {
 	});
 };
 
-function showAllCards(){
-	for (var i = 0 ; i < $('article').length ; i++){
-		($($('article')[i])).show();
-	}
-}
+// function showAllCards(){
+// 	for (var i = 0 ; i < $('article').length ; i++){
+// 		($($('article')[i])).show();
+// 	}
+// }
 
 $('.show-button').on('click', showMore)
 
