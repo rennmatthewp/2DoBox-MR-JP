@@ -25,6 +25,12 @@ $('section').on('keyup', '.edit-body', function(e) {
 	}
 });
 
+$('.save-button').on('click', function(e) {
+	e.preventDefault();
+	formSubmit();
+	$('.save-button').prop('disabled', true);
+});
+
 
 
 
@@ -75,13 +81,6 @@ ToDoCard.prototype.doYouMatch = function(searchTerm) {
 	}
 };
 
-//event listeners
-$('.save-button').on('click', function(e) {
-	e.preventDefault();
-	formSubmit();
-});
-
-
 //collects title and body, runs constructor
 function formSubmit() {
 	var title = $('.title-input').val();
@@ -90,6 +89,7 @@ function formSubmit() {
 	$('section').prepend(populateCard(toDoCard));
 	resetHeader();
 	sendToLocalStorage();
+	showCards(10);
 };
 
 //extracts values from HTML, inputs those values to constructor function which creates an toDoCard
@@ -123,8 +123,7 @@ function populateCard(toDoCard) {
 					</h5>
 				</div>
 			</article>`);
-	$(section).empty();
-	showCards(10);
+	
 };
 
 function upvoteCard() {
@@ -185,7 +184,6 @@ function sendToLocalStorage() {
 
 function getStoredCards() {
 	var retrievedCards = JSON.parse(localStorage.getItem("storedCards")) || [];
-	
 	appendCards(retrievedCards);
 	// retrievedCards.forEach(function (retrievedCard) {
 	// 	var toDoCard = new ToDoCard(retrievedCard.title, retrievedCard.body, retrievedCard.id, retrievedCard.importance);
@@ -239,21 +237,11 @@ function showCards(n){
 		for (var i = 0 ; i < cardLength ; i++){
 			if (i < n){
 				$($('article')[i]).show();
-			}else{
+			} else {
 				$($('article')[i]).hide();	
 			}
 		}
 };
-
-// function for marking tasks completed 
-
-ToDoCard.completed = function() {
-	$('.completed').on('click', )
-}
-
-function addCompletedClass() {
-
-}
 
 $('.critical-button').on('click', filterCritical)
 $('.high-button').on('click', filterHigh)
@@ -301,3 +289,10 @@ function filterNone() {
 	$('section').empty()
 	appendCards(noneCards);
 }
+
+//completed tasks
+
+$('article').on('click', '.completed-button', function(){
+	$(this).closest('article').toggleClass('.completed')
+	$('article').length - $('.completed').length;
+});
