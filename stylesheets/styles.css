@@ -1,4 +1,6 @@
-
+* {
+	box-sizing: border-box;
+}
 *:focus {
 	box-shadow: 0 0 3px #00a79d;
 }
@@ -260,12 +262,14 @@ h5 {
 }
 
 @media screen and (max-width: 655px) {
+
 	header {
 		padding: 20px 22px 10px;
 	}
+
 	section {
-		margin-left: 0;
-		margin-right: 0;
+		/*margin-left: 0;*/
+		/*margin-right: 0;*/
 		width: 100%;
 	}
 
@@ -286,10 +290,11 @@ h5 {
 	.body-input,
 	.save-button,
 	.filter {
-		margin-left: 0;
-		margin-right: 0;
+		/*margin-left: 0;*/
+		/*margin-right: 0;*/
 		padding: 0;
 		width: 100%;
+		resize: none;
 	}
 
 	.importance {
