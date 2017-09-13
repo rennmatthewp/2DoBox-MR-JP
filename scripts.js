@@ -5,17 +5,20 @@ $('section').on('click', 'h2', editTitle);
 $('section').on('click', 'p', editBody);
 $('section').on('focusout', '.edit-title', editTitleSave);
 $('section').on('focusout', '.edit-body', editBodySave);
+$('.search').on('keyup', realtimeSearch)
+
 $('section').on('keyup', '.edit-title', function(e) {
 	if (e.keyCode === 13) {
 		$(this).blur();
 	}
 });
+
 $('section').on('keyup', '.edit-body', function(e) {
 	if (e.keyCode === 13) {
 		$(this).blur();
 	}
 });
-$('.search').on('keyup', realtimeSearch)
+
 
 //setting focus in title input, retrieve local storage
 $(document).ready(function() {
