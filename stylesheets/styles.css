@@ -43,7 +43,7 @@ article {
 
 h1 {
 	color: #DAD2B9;
-	font-family: Roboto Slab;
+	font-family: 'Roboto Slab', serif;
 	font-size: 60px;
 	font-weight: 700;
 	margin-bottom: 45px;
@@ -55,7 +55,7 @@ h1 span {
 }
 
 h5 {
-	font-family: Roboto Slab;
+	font-family: 'Roboto Slab', serif;
 }
 
 .title-input,
@@ -101,21 +101,24 @@ h5 {
 
 .filter-button-wrapper {
 	align-items: center;
+	border-bottom: 1.5px solid #d1d3d4;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-around;
 	margin: 0 auto 27px;
 	max-width: 585px;
+	padding-bottom: 15px;
 }
 
 .filter-button {
 	background-color: #d1d3d4;
 	border: none;
 	color: #626e71;
+	cursor: pointer;
 	font-size: 18px;
 	height: 30px;
-	margin-top: 10px;
-	width: 120px;
+	margin: 12px 20.7px;
+	width: 105px;
 	transition: all .3s ease;
 }
 
@@ -124,20 +127,24 @@ h5 {
 	transition: all .3s ease;
 }
 
-.none-button:hover {
+.show-completed-button:hover {
 	background-color: #4c5760;
 }
 
-.low-button:hover {
+.none-button:hover {
 	background-color: #045e55;
 }
 
-.normal-button:hover {
+.low-button:hover {
 	background-color: #39b54a;
 }
 
+.normal-button:hover {
+	background-color: #f0d403;
+}
+
 .high-button:hover {
-	background-color: #fbb040;
+	background-color: #fb8140;
 }
 
 .critical-button:hover {
@@ -145,14 +152,14 @@ h5 {
 }
 
 .filter {
-	margin-bottom: 42px;
+	margin-bottom: 13px;
 }
 
 .card-title,
 .edit-title {
 	color: #6d6e71;
 	cursor: pointer;
-	font-family: Roboto Slab;
+	font-family: 'Roboto Slab', serif;
 	font-size: 24px;
 	font-weight: 700;
 	overflow-wrap: break-word
@@ -167,7 +174,7 @@ h5 {
 .edit-body {
 	color: #939598;
 	cursor: pointer;
-	font-family: Open Sans;
+	font-family: 'Open Sans', sans-serif;
 	font-size: 21px;
 	font-weight: 400;
 	line-height: 1.3;
@@ -199,11 +206,16 @@ h5 {
 .completed-button {
 	background-image: url("../assets/success.svg");
 	background-size: contain;
-	margin-left: auto;
+	margin: 1px 1.1px 0 auto;
+	width: 28px;
 }
 
-.completed {
-	text-decoration: line-through;
+.completed-button:hover {
+	background-image: url("../assets/success-hover.svg")
+}
+
+.completed-button-clicked {
+	background-image: url("../assets/success-hover.svg");
 }
 
 .upvote-button {
@@ -230,6 +242,10 @@ h5 {
 	background-image: url("../assets/delete-hover.svg");
 }
 
+.completed {
+	text-decoration: line-through;
+}
+
 .importance-wrapper {
 	display: flex;
 	align-items: center;
@@ -247,7 +263,7 @@ h5 {
 }
 
 .importance-span {
-	font-family: Open Sans;
+	font-family: 'Open Sans', sans-serif;
 }
 
 .card-display-none {
@@ -257,6 +273,7 @@ h5 {
 .show-button {
 	border: none;
 	color: #fff;
+	cursor: pointer;
 	display: block;
 	height: 30px;
 	width: 200px;
@@ -287,6 +304,10 @@ h5 {
 		margin-bottom: 12px;
 	}
 
+	.filter-button {
+		margin: 12px 0;
+	}
+
 	.body-input {
 		height: 82px;
 	}
@@ -295,7 +316,7 @@ h5 {
 	.body-input,
 	.save-button,
 	.filter {
-		padding: 0;
+		padding: 0 5px;
 		width: 100%;
 		resize: none;
 	}

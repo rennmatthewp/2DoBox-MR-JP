@@ -3,6 +3,7 @@ $(document).ready(function() {
 	appendCards(ToDoCard.incomplete());
 	showCards(10);
 });
+
 ($('.title-input'), $('.body-input')).on('keyup', enableSaveButton);
 $('section').on('click', '.upvote-button', upvoteCard);
 $('section').on('click', '.downvote-button', downvoteCard);
@@ -51,7 +52,7 @@ ToDoCard.find = function(id){
 	var cards = ToDoCard.findAll();
 	var card = cards.find(function(card){
 	return id === card.id;
-	}) 
+	})
 	return card
 };
 
@@ -66,7 +67,7 @@ ToDoCard.findAll = function(){
 
 ToDoCard.prototype.importanceString = function() {
 	var importanceArray = ['None', 'Low', 'Normal', 'High', 'Critical'];
-	return importanceArray[this.importance]; 
+	return importanceArray[this.importance];
 };
 
 //increments the importance value
@@ -98,7 +99,7 @@ function formSubmit() {
 	$('section').prepend(populateCard(toDoCard));
 	resetHeader();
 	sendToLocalStorage();
-	// showCards(10);
+	showCards(10);
 };
 
 function extractCard(elementInsideArticle) {
@@ -204,6 +205,7 @@ function appendCards (arr){
 ToDoCard.incomplete = function(){
 	return ToDoCard.findAll().filter(function(card){
 		return !card.completed;
+
 	})
 };
 
@@ -212,7 +214,6 @@ ToDoCard.complete = function(){
 		return card.completed;
 	})
 };
-
 
 //resets inpus and focus after save
 function resetHeader() {
@@ -235,7 +236,7 @@ function realtimeSearch() {
 	});
 };
 
-$('.show-button').on('click', showMore)
+$('.show-button').on('click', showMore);
 
 function showMore(){
 	var cardCount = $('article').length;
@@ -250,63 +251,70 @@ function showCards(n){
 			if (i < n){
 				$(articleElements.get(i)).show();
 			} else {
-				$(articleElements.get(i)).hide();	
-		}
+				$(articleElements.get(i)).hide();
+			};
+		};
 };
 
-$('.critical-button').on('click', filterCritical)
-$('.high-button').on('click', filterHigh)
-$('.normal-button').on('click', filterNormal)
-$('.low-button').on('click', filterLow)
-$('.none-button').on('click', filterNone)
+$('.critical-button').on('click', filterCritical);
+$('.high-button').on('click', filterHigh);
+$('.normal-button').on('click', filterNormal);
+$('.low-button').on('click', filterLow);
+$('.none-button').on('click', filterNone);
 
 function filterCritical() {
 	var storedCards = JSON.parse(localStorage.getItem('storedCards'));
 	var criticalCards = storedCards.filter(function(card){
 		return card.importance === 4;
 	})
-	$('section').empty()
+	$('section').empty();
 	appendCards(criticalCards);
 }
+
 function filterHigh() {
 	var storedCards = JSON.parse(localStorage.getItem('storedCards'));
 	var highCards = storedCards.filter(function(card){
 		return card.importance === 3;
-	})
-	$('section').empty()
+	});
+	$('section').empty();
 	appendCards(highCards);
 }
+
 function filterNormal() {
 	var storedCards = JSON.parse(localStorage.getItem('storedCards'));
 	var normalCards = storedCards.filter(function(card){
 		return card.importance === 2;
 	})
-	$('section').empty()
+	$('section').empty();
 	appendCards(normalCards);
 }
+
 function filterLow() {
 	var storedCards = JSON.parse(localStorage.getItem('storedCards'));
 	var lowCards = storedCards.filter(function(card){
 		return card.importance === 1;
 	})
-	$('section').empty()
+	$('section').empty();
 	appendCards(lowCards);
 }
+
 function filterNone() {
 	var storedCards = JSON.parse(localStorage.getItem('storedCards'));
 	var noneCards = storedCards.filter(function(card){
 		return card.importance === 0;
 	})
-	$('section').empty()
+	$('section').empty();
 	appendCards(noneCards);
 };
 
-$('section').on('click', '.completed-button', toggleCompleted)
-$('.show-completed-button').on('click', showCompleted)
+//completed tasks
+$('section').on('click', '.completed-button', toggleCompleted);
+$('.show-completed-button').on('click', showCompleted);
 
 function toggleCompleted(e) {
-	$(e.target).closest('article').toggleClass('completed')
-	var articleID = $(e.target).closest('article').data('id')
+	$(e.target).closest('article').toggleClass('completed');
+	$(e.target).toggleClass('completed-button-clicked');
+	var articleID = $(e.target).closest('article').data('id');
 	var cardInstance = ToDoCard.find(articleID);
 	cardInstance.completed = !cardInstance.completed;
 	sendToLocalStorage();
@@ -315,6 +323,5 @@ function toggleCompleted(e) {
 function showCompleted() {
 	$('section').empty();
 	appendCards(ToDoCard.complete());
-}
-}
-
+  }
+};

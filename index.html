@@ -1,38 +1,38 @@
 <!doctype HTML>
 <html>
-<head>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="stylesheets/reset.css" type="text/css" rel="stylesheet">
-	<link href="stylesheets/styles.css" type="text/css" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto+Slab:700" rel="stylesheet">
-	<title>2DoBox</title>
-</head>
-<body>
-	<header>
-		<h1>2Do<span>Box</span></h1>
-		<form>
-			<input aria-label="input idea title" class="title-input" type="text" placeholder="Title">
-			<textarea aria-label="input idea body" rows="10" columns="5" class="body-input" type="text" placeholder="Body"></textarea>
-			<button aria-label="save" class="save-button" disabled>save</button>
-		</form>
-	</header>
-	<main>
-		<div class="filter-button-wrapper">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="stylesheets/reset.css" type="text/css" rel="stylesheet">
+		<link href="stylesheets/styles.css" type="text/css" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:400|Roboto+Slab:700" rel="stylesheet">
+		<title>2DoBox</title>
+	</head>
+	<body>
+		<header>
+			<h1>2Do<span>Box</span></h1>
+			<form>
+				<input aria-label="input idea title" class="title-input" type="text" placeholder="Title">
+				<textarea aria-label="input idea body" rows="10" columns="5" class="body-input" type="text" placeholder="Body"></textarea>
+				<button aria-label="save" class="save-button" disabled>save</button>
+			</form>
+		</header>
+		<main>
+			<input aria-label="filter" class="filter" type="text" placeholder="Filter">
+			<div class="filter-button-wrapper">
+				<button class="filter-button show-completed-button">Completed</button>
 				<button class="filter-button none-button">None</button>
 				<button class="filter-button low-button">Low</button>
 				<button class="filter-button normal-button">Normal</button>
 				<button class="filter-button high-button">High</button>
 				<button class="filter-button critical-button">Critical</button>
-				<button class="filter-button show-completed-button">Completed</button>
-		</div>
-		<input aria-label="filter" class="filter" type="text" placeholder="Filter">
-		<section>
-			<!-- cards prepend here -->
-		</section>
-		<button class="show-button">Show More...</button>
-	</main>
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-	<script>window.jQuery || document.write('<script src="path/to/your/jquery.min.js"><\/script>')</script>
-	<script src="scripts.js"></script>
-</body>
+			</div>
+			<section>
+				<!-- cards prepend here -->
+			</section>
+			<button class="show-button">Show More...</button>
+		</main>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<script>window.jQuery || document.write('<script src="path/to/your/jquery.min.js"><\/script>')</script>
+		<script src="scripts.js"></script>
+	</body>
 </html>
