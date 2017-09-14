@@ -323,5 +323,4 @@ function toggleCompleted(e) {
 function showCompleted() {
 	$('section').empty();
 	appendCards(ToDoCard.complete());
-  }
 };

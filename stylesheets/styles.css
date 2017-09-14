@@ -118,6 +118,7 @@ h5 {
 	font-size: 18px;
 	height: 30px;
 	margin: 12px 20.7px;
+	outline-color: #4C5760;
 	width: 105px;
 	transition: all .3s ease;
 }
