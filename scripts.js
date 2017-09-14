@@ -311,7 +311,6 @@ function filterNone() {
 	$('section').empty()
 	appendCards(noneCards);
 }
-}
 
 //completed tasks
 $('section').on('click', '.completed-button', toggleCompleted)
@@ -329,3 +328,4 @@ function showCompleted() {
 	$('section').empty()
 	appendCards(ToDoCard.complete());
 }
+
