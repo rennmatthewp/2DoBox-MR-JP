@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	$('.title-input').focus();
-	getStoredCards()
+	appendCards(ToDoCard.incomplete());
 	showCards(10);
 });
 ($('.title-input'), $('.body-input')).on('keyup', enableSaveButton);
@@ -25,6 +25,12 @@ $('section').on('keyup', '.edit-body', function(e) {
 	}
 });
 
+$('.save-button').on('click', function(e) {
+	e.preventDefault();
+	formSubmit();
+	$('.save-button').prop('disabled', true);
+});
+
 
 
 
@@ -39,17 +45,35 @@ function enableSaveButton() {
 };
 
 //constructor function and prototypes
-var ToDoCard = function(title, body, id = Date.now(), importance = 2) {
+var ToDoCard = function(title, body, id = Date.now(), importance = 2, completed = false) {
 	this.title = title;
 	this.body = body;
 	this.id = id;
 	this.importance = importance;
+	this.completed = completed;
 };
+
+ToDoCard.find = function(id){
+	var cards = ToDoCard.findAll();
+	var card = cards.find(function(card){
+	return id === card.id;
+	}) 
+	return card
+}
+
+ToDoCard.findAll = function(){
+	var cardArray = [];
+	var retrievedCards = JSON.parse(localStorage.getItem("storedCards")) || [];
+	retrievedCards.forEach(function(card){
+		cardArray.push(new ToDoCard (card.title, card.body, card.id, card.importance, card.completed));
+	})
+	return cardArray;
+}
 
 //connects the quailty index to the string in that index
 ToDoCard.prototype.importanceString = function() {
 	var importanceArray = ['None', 'Low', 'Normal', 'High', 'Critical'];
-	return importanceArray[this.importance];
+	return importanceArray[this.importance]; 
 };
 
 //increments the importance value
@@ -75,13 +99,6 @@ ToDoCard.prototype.doYouMatch = function(searchTerm) {
 	}
 };
 
-//event listeners
-$('.save-button').on('click', function(e) {
-	e.preventDefault();
-	formSubmit();
-});
-
-
 //collects title and body, runs constructor
 function formSubmit() {
 	var title = $('.title-input').val();
@@ -90,6 +107,7 @@ function formSubmit() {
 	$('section').prepend(populateCard(toDoCard));
 	resetHeader();
 	sendToLocalStorage();
+	// showCards(10);
 };
 
 //extracts values from HTML, inputs those values to constructor function which creates an toDoCard
@@ -99,7 +117,8 @@ function extractCard(elementInsideArticle) {
 	var body = $('.body', article).text();
 	var id = article.data('id');
 	var importance = $('.importance-span', article).data('importance');
-	var toDoCard = new ToDoCard(title, body, id, importance);
+	var completed = article.hasClass('completed');
+	var toDoCard = new ToDoCard(title, body, id, importance, completed);
 	return toDoCard;
 };
 
@@ -109,7 +128,7 @@ function populateCard(toDoCard) {
 	var newBody = toDoCard.body;
 	var newId = toDoCard.id;
 	var newImportance = toDoCard.importanceString();
-	return (`<article data-id="${newId}">
+	return (`<article data-id="${newId}" class="${toDoCard.completed ? 'completed' : ''}">
 				<div class="h2-wrapper">
 					<h2 class="card-title">${newTitle}</h2>
 					<button class="delete-button"></button>
@@ -124,8 +143,6 @@ function populateCard(toDoCard) {
 					<button class="completed-button"></button>
 				</div>
 			</article>`);
-	$(section).empty();
-	showCards(10);
 };
 
 function upvoteCard() {
@@ -186,20 +203,28 @@ function sendToLocalStorage() {
 
 function getStoredCards() {
 	var retrievedCards = JSON.parse(localStorage.getItem("storedCards")) || [];
-
 	appendCards(retrievedCards);
-	// retrievedCards.forEach(function (retrievedCard) {
-	// 	var toDoCard = new ToDoCard(retrievedCard.title, retrievedCard.body, retrievedCard.id, retrievedCard.importance);
-	// 	$('section').append(populateCard(toDoCard));
-	// });
 };
 
 function appendCards (arr){
 	arr.forEach(function (card) {
-		var toDoCard = new ToDoCard(card.title, card.body, card.id, card.importance);
+		var toDoCard = new ToDoCard(card.title, card.body, card.id, card.importance, card.completed);
 		$('section').append(populateCard(toDoCard));
 	});
 }
+
+ToDoCard.incomplete = function(){
+	return ToDoCard.findAll().filter(function(card){
+		return !card.completed;
+	})
+}
+
+ToDoCard.complete = function(){
+	return ToDoCard.findAll().filter(function(card){
+		return card.completed;
+	})
+}
+
 
 //resets inpus and focus after save
 function resetHeader() {
@@ -221,12 +246,6 @@ function realtimeSearch() {
 	});
 };
 
-// function showAllCards(){
-// 	for (var i = 0 ; i < $('article').length ; i++){
-// 		($($('article')[i])).show();
-// 	}
-// }
-
 $('.show-button').on('click', showMore)
 
 function showMore(){
@@ -236,25 +255,15 @@ function showMore(){
 };
 
 function showCards(n){
-	var cardLength = $('article').length;
+	var articleElements = $('article')
+	var cardLength = articleElements.length;
 		for (var i = 0 ; i < cardLength ; i++){
 			if (i < n){
-				$($('article')[i]).show();
-			}else{
-				$($('article')[i]).hide();
-			}
+				$(articleElements.get(i)).show();
+			} else {
+				$(articleElements.get(i)).hide();	
 		}
 };
-
-// function for marking tasks completed
-
-ToDoCard.completed = function() {
-	$('.completed').on('click', )
-}
-
-function addCompletedClass() {
-
-}
 
 $('.critical-button').on('click', filterCritical)
 $('.high-button').on('click', filterHigh)
@@ -302,3 +311,21 @@ function filterNone() {
 	$('section').empty()
 	appendCards(noneCards);
 }
+
+//completed tasks
+$('section').on('click', '.completed-button', toggleCompleted)
+$('.show-completed-button').on('click', showCompleted)
+
+function toggleCompleted(e) {
+	$(e.target).closest('article').toggleClass('completed')
+	var articleID = $(e.target).closest('article').data('id')
+	var cardInstance = ToDoCard.find(articleID);
+	cardInstance.completed = !cardInstance.completed
+	sendToLocalStorage();
+}
+
+function showCompleted() {
+	$('section').empty()
+	appendCards(ToDoCard.complete());
+}
+
