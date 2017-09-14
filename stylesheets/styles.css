@@ -102,11 +102,13 @@ h5 {
 
 .filter-button-wrapper {
 	align-items: center;
+	border-bottom: 1.5px solid #d1d3d4;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
 	margin: 0 auto 27px;
 	max-width: 585px;
+	padding-bottom: 15px;
 }
 
 .filter-button {
@@ -115,7 +117,8 @@ h5 {
 	color: #626e71;
 	font-size: 18px;
 	height: 30px;
-	width: 88px;
+	margin: 12px 20.7px;
+	width: 105px;
 	transition: all .3s ease;
 }
 
@@ -124,20 +127,24 @@ h5 {
 	transition: all .3s ease;
 }
 
-.none-button:hover {
+.show-completed-button:hover {
 	background-color: #4c5760;
 }
 
-.low-button:hover {
+.none-button:hover {
 	background-color: #045e55;
 }
 
-.normal-button:hover {
+.low-button:hover {
 	background-color: #39b54a;
 }
 
+.normal-button:hover {
+	background-color: #f0d403;
+}
+
 .high-button:hover {
-	background-color: #fbb040;
+	background-color: #fb8140;
 }
 
 .critical-button:hover {
@@ -145,7 +152,7 @@ h5 {
 }
 
 .filter {
-	margin-bottom: 42px;
+	margin-bottom: 15px;
 }
 
 .card-title,
@@ -199,11 +206,8 @@ h5 {
 .completed-button {
 	background-image: url("../assets/success.svg");
 	background-size: contain;
-	margin-left: auto;
-}
-
-.completed {
-	text-decoration: line-through;
+	margin: 1px 1.1px 0 auto;
+	width: 28px;
 }
 
 .upvote-button {
@@ -228,6 +232,10 @@ h5 {
 
 .delete-button:hover {
 	background-image: url("../assets/delete-hover.svg");
+}
+
+.completed {
+	text-decoration: line-through;
 }
 
 .importance-wrapper {
@@ -285,6 +293,10 @@ h5 {
 	h1 {
 		font-size: 36px;
 		margin-bottom: 12px;
+	}
+
+	.filter-button {
+		margin: 12px 0;
 	}
 
 	.body-input {
