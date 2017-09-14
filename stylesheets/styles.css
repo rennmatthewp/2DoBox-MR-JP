@@ -1,6 +1,7 @@
 * {
 	box-sizing: border-box;
 }
+
 *:focus {
 	box-shadow: 0 0 3px #00a79d;
 }
@@ -63,11 +64,12 @@ h5 {
 .filter {
 	border: 1.5px solid #d1d3d4;
 	display: block;
-	font-size: 22.5px;
-	height: 31.5px;
+	font-size: 24px;
+	height: 36px;
 	margin: 9px auto;
 	outline-color: #4C5760;
-	width: 582px;
+	padding: 0 8px;
+	width: 585px;
 }
 
 .save-button {
@@ -77,8 +79,7 @@ h5 {
 	cursor: pointer;
 	height: 46.5px;
 	padding: 7.5px;
-	transition: background-color .3s ease;
-	width: 587px;
+	transition: all .3s ease;
 }
 
 .save-button:disabled {
@@ -104,7 +105,7 @@ h5 {
 	display: flex;
 	justify-content: space-between;
 	margin: 0 auto 27px;
-	max-width: 582px;
+	max-width: 585px;
 }
 
 .filter-button {
@@ -114,35 +115,31 @@ h5 {
 	font-size: 17px;
 	height: 30px;
 	width: 88px;
-	transition: background-color, color .3s ease;
+	transition: all .3s ease;
 }
 
 .filter-button:hover {
+	color: #FFF;
 	transition: all .3s ease;
 }
 
 .none-button:hover {
-	color: #fff;
 	background-color: #4c5760;
 }
 
 .low-button:hover {
-	color: #fff;
 	background-color: #045e55;
 }
 
 .normal-button:hover {
-	color: #fff;
 	background-color: #39b54a;
 }
 
 .high-button:hover {
-	color: #fff;
 	background-color: #fbb040;
 }
 
 .critical-button:hover {
-	color: #fff;
 	background-color: #ef4136;
 }
 
@@ -185,8 +182,16 @@ h5 {
 	background-repeat: no-repeat;
 	border: none;
 	height: 31px;
-	padding: 0;
 	width: 31px;
+	transition: all ease 300ms;
+}
+
+.delete-button:hover,
+.upvote-button:hover,
+.downvote-button:hover,
+.upvote-button:hover,
+.completed-button:hover {
+	cursor: pointer;
 	transition: all ease 300ms;
 }
 
@@ -196,39 +201,28 @@ h5 {
 	margin-left: auto;
 }
 
-
-
 .upvote-button {
 	background-image: url("../assets/upvote.svg");
-	/*transition: all ease 300ms;*/
 }
 
 .upvote-button:hover {
 	background-image: url("../assets/upvote-hover.svg");
-	cursor: pointer;
-	transition: all ease 300ms;
 }
 
 .downvote-button {
 	background-image: url("../assets/downvote.svg");
-	/*transition: all ease 300ms;*/
 }
 
 .downvote-button:hover {
 	background-image: url("../assets/downvote-hover.svg");
-	cursor: pointer;
-	transition: all ease 300ms;
 }
 
 .delete-button {
 	background-image: url("../assets/delete.svg");
-	/*transition: all ease 300ms;*/
 }
 
 .delete-button:hover {
 	background-image: url("../assets/delete-hover.svg");
-	cursor: pointer;
-	transition: all ease 300ms;
 }
 
 .importance-wrapper {
@@ -237,7 +231,6 @@ h5 {
 }
 
 .downvote-button,
-/*.importance,*/
 .upvote-button {
 	margin-right: 22.5px;
 }
@@ -268,7 +261,6 @@ h5 {
 
 ::placeholder {
 	color: #d1d3d4;
-	/*margin-left: 7.5px;*/
 }
 
 @media screen and (max-width: 655px) {
@@ -278,8 +270,6 @@ h5 {
 	}
 
 	section {
-		/*margin-left: 0;*/
-		/*margin-right: 0;*/
 		width: 100%;
 	}
 
@@ -300,11 +290,14 @@ h5 {
 	.body-input,
 	.save-button,
 	.filter {
-		/*margin-left: 0;*/
-		/*margin-right: 0;*/
 		padding: 0;
 		width: 100%;
 		resize: none;
+	}
+
+	.downvote-button,
+	.upvote-button {
+		margin-right: 15px;
 	}
 
 	.importance {
