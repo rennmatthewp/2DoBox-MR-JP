@@ -1,4 +1,6 @@
-
+* {
+	box-sizing: border-box;
+}
 *:focus {
 	box-shadow: 0 0 3px #00a79d;
 }
@@ -42,7 +44,7 @@ h1 {
 	color: #DAD2B9;
 	font-family: Roboto Slab;
 	font-size: 60px;
-	/*font-weight: 700;*/
+	font-weight: 700;
 	margin-bottom: 45px;
 	text-align: center;
 }
@@ -177,18 +179,28 @@ h5 {
 
 .upvote-button,
 .downvote-button,
-.delete-button {
+.delete-button,
+.completed-button {
 	background-color: #fff;
 	background-repeat: no-repeat;
 	border: none;
 	height: 31px;
 	padding: 0;
 	width: 31px;
+	transition: all ease 300ms;
 }
+
+.completed-button {
+	background-image: url("../assets/success.svg");
+	background-size: contain;
+	margin-left: auto;
+}
+
+
 
 .upvote-button {
 	background-image: url("../assets/upvote.svg");
-	transition: all ease 300ms;
+	/*transition: all ease 300ms;*/
 }
 
 .upvote-button:hover {
@@ -199,7 +211,7 @@ h5 {
 
 .downvote-button {
 	background-image: url("../assets/downvote.svg");
-	transition: all ease 300ms;
+	/*transition: all ease 300ms;*/
 }
 
 .downvote-button:hover {
@@ -210,7 +222,7 @@ h5 {
 
 .delete-button {
 	background-image: url("../assets/delete.svg");
-	transition: all ease 300ms;
+	/*transition: all ease 300ms;*/
 }
 
 .delete-button:hover {
@@ -260,12 +272,14 @@ h5 {
 }
 
 @media screen and (max-width: 655px) {
+
 	header {
 		padding: 20px 22px 10px;
 	}
+
 	section {
-		margin-left: 0;
-		margin-right: 0;
+		/*margin-left: 0;*/
+		/*margin-right: 0;*/
 		width: 100%;
 	}
 
@@ -286,10 +300,11 @@ h5 {
 	.body-input,
 	.save-button,
 	.filter {
-		margin-left: 0;
-		margin-right: 0;
+		/*margin-left: 0;*/
+		/*margin-right: 0;*/
 		padding: 0;
 		width: 100%;
+		resize: none;
 	}
 
 	.importance {
