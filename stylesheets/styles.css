@@ -115,6 +115,7 @@ h5 {
 	background-color: #d1d3d4;
 	border: none;
 	color: #626e71;
+	cursor: pointer;
 	font-size: 18px;
 	height: 30px;
 	margin: 12px 20.7px;
@@ -152,7 +153,7 @@ h5 {
 }
 
 .filter {
-	margin-bottom: 15px;
+	margin-bottom: 13px;
 }
 
 .card-title,
@@ -210,6 +211,14 @@ h5 {
 	width: 28px;
 }
 
+.completed-button:hover {
+	background-image: url("../assets/success-hover.svg")
+}
+
+.completed-button-clicked {
+	background-image: url("../assets/success-hover.svg");
+}
+
 .upvote-button {
 	background-image: url("../assets/upvote.svg");
 }
@@ -265,6 +274,7 @@ h5 {
 .show-button {
 	border: none;
 	color: #fff;
+	cursor: pointer;
 	display: block;
 	height: 30px;
 	width: 200px;
@@ -307,7 +317,7 @@ h5 {
 	.body-input,
 	.save-button,
 	.filter {
-		padding: 0;
+		padding: 0 5px;
 		width: 100%;
 		resize: none;
 	}

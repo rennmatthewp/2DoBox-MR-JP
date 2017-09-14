@@ -320,6 +320,7 @@ $('.show-completed-button').on('click', showCompleted);
 
 function toggleCompleted(e) {
 	$(e.target).closest('article').toggleClass('completed');
+	$(e.target).toggleClass('completed-button-clicked');
 	var articleID = $(e.target).closest('article').data('id');
 	var cardInstance = ToDoCard.find(articleID);
 	cardInstance.completed = !cardInstance.completed;
