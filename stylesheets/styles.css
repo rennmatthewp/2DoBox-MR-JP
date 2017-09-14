@@ -79,7 +79,6 @@ h5 {
 	cursor: pointer;
 	height: 46.5px;
 	padding: 7.5px;
-	transition: all .3s ease;
 }
 
 .save-button:disabled {
@@ -104,7 +103,7 @@ h5 {
 	align-items: center;
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: space-between;
+	justify-content: space-around;
 	margin: 0 auto 27px;
 	max-width: 585px;
 }
@@ -115,7 +114,8 @@ h5 {
 	color: #626e71;
 	font-size: 18px;
 	height: 30px;
-	width: 88px;
+	margin-top: 10px;
+	width: 120px;
 	transition: all .3s ease;
 }
 
