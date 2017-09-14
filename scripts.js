@@ -12,7 +12,7 @@ $('section').on('click', 'h2', editTitle);
 $('section').on('click', 'p', editBody);
 $('section').on('focusout', '.edit-title', editTitleSave);
 $('section').on('focusout', '.edit-body', editBodySave);
-$('.search').on('keyup', realtimeSearch)
+$('.filter').on('keyup', realtimeSearch)
 
 $('section').on('keyup', '.edit-title', function(e) {
 	if (e.keyCode === 13) {
@@ -32,8 +32,6 @@ $('.save-button').on('click', function(e) {
 	$('.save-button').prop('disabled', true);
 });
 
-//setting focus in title input, retrieve local storage
-
 function enableSaveButton() {
   if ($('.title-input').val() !== "" && $('.body-input').val() !== "") {
     $('.save-button').prop('disabled', false);
@@ -42,7 +40,6 @@ function enableSaveButton() {
   }
 };
 
-//constructor function and prototypes
 var ToDoCard = function(title, body, id = Date.now(), importance = 2, completed = false) {
 	this.title = title;
 	this.body = body;
@@ -57,7 +54,7 @@ ToDoCard.find = function(id){
 	return id === card.id;
 	})
 	return card
-}
+};
 
 ToDoCard.findAll = function(){
 	var cardArray = [];
@@ -66,9 +63,8 @@ ToDoCard.findAll = function(){
 		cardArray.push(new ToDoCard (card.title, card.body, card.id, card.importance, card.completed));
 	})
 	return cardArray;
-}
+};
 
-//connects the quailty index to the string in that index
 ToDoCard.prototype.importanceString = function() {
 	var importanceArray = ['None', 'Low', 'Normal', 'High', 'Critical'];
 	return importanceArray[this.importance];
@@ -88,7 +84,6 @@ ToDoCard.prototype.importanceDecrement = function() {
 	}
 };
 
-//checks for matches in title, body and importance in the search input
 ToDoCard.prototype.doYouMatch = function(searchTerm) {
 	if (this.title.toUpperCase().includes(searchTerm) || this.body.toUpperCase().includes(searchTerm) || this.importanceString().toUpperCase().includes(searchTerm)) {
 		return true;
@@ -97,7 +92,6 @@ ToDoCard.prototype.doYouMatch = function(searchTerm) {
 	}
 };
 
-//collects title and body, runs constructor
 function formSubmit() {
 	var title = $('.title-input').val();
 	var body = $('.body-input').val();
@@ -108,7 +102,6 @@ function formSubmit() {
 	showCards(10);
 };
 
-//extracts values from HTML, inputs those values to constructor function which creates an toDoCard
 function extractCard(elementInsideArticle) {
 	var article = $(elementInsideArticle).closest('article');
 	var title = $('.card-title', article).text();
@@ -120,7 +113,6 @@ function extractCard(elementInsideArticle) {
 	return toDoCard;
 };
 
-//takes values from toDoCard and inserts those values to HTML
 function populateCard(toDoCard) {
 	var newTitle = toDoCard.title;
 	var newBody = toDoCard.body;
@@ -190,7 +182,6 @@ function editBodySave() {
 	sendToLocalStorage();
 };
 
-//local storage functions
 function sendToLocalStorage() {
 	var cardArray = [];
 	$('article').each(function (index, element) {
@@ -208,20 +199,21 @@ function appendCards (arr){
 	arr.forEach(function (card) {
 		var toDoCard = new ToDoCard(card.title, card.body, card.id, card.importance, card.completed);
 		$('section').append(populateCard(toDoCard));
-	});
-}
+	})
+};
 
 ToDoCard.incomplete = function(){
 	return ToDoCard.findAll().filter(function(card){
 		return !card.completed;
-	});
-}
+
+	})
+};
 
 ToDoCard.complete = function(){
 	return ToDoCard.findAll().filter(function(card){
 		return card.completed;
-	});
-}
+	})
+};
 
 //resets inpus and focus after save
 function resetHeader() {
@@ -232,7 +224,8 @@ function resetHeader() {
 
 //runs .doYouMatch prototype and adds or removes class to display search matches
 function realtimeSearch() {
-	var searchTerm = $('.search').val().toUpperCase();
+	console.log('hi')
+	var searchTerm = $('.filter').val().toUpperCase();
 	$('article').each(function (index, element) {
 		var toDoCard = extractCard(element);
 		if (toDoCard.doYouMatch(searchTerm)) {
@@ -312,7 +305,7 @@ function filterNone() {
 	})
 	$('section').empty();
 	appendCards(noneCards);
-}
+};
 
 //completed tasks
 $('section').on('click', '.completed-button', toggleCompleted);
@@ -325,9 +318,10 @@ function toggleCompleted(e) {
 	var cardInstance = ToDoCard.find(articleID);
 	cardInstance.completed = !cardInstance.completed;
 	sendToLocalStorage();
-}
+};
 
 function showCompleted() {
 	$('section').empty();
 	appendCards(ToDoCard.complete());
-}
+  }
+};
