@@ -102,6 +102,7 @@ h5 {
 .filter-button-wrapper {
 	align-items: center;
 	display: flex;
+	flex-wrap: wrap;
 	justify-content: space-between;
 	margin: 0 auto 27px;
 	max-width: 582px;
@@ -111,9 +112,10 @@ h5 {
 	background-color: #d1d3d4;
 	border: none;
 	color: #626e71;
-	font-size: 17px;
+	font-size: 18px;
 	height: 30px;
-	width: 88px;
+	margin: 10px auto;
+	width: 120px;
 	transition: background-color, color .3s ease;
 }
 
@@ -196,7 +198,9 @@ h5 {
 	margin-left: auto;
 }
 
-
+.completed {
+	text-decoration: line-through;
+}
 
 .upvote-button {
 	background-image: url("../assets/upvote.svg");
